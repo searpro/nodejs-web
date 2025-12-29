@@ -4,6 +4,7 @@ const PORT = process.env.PORT || 3000;
 
 // Root route
 app.get('/', (req, res) => {
+  console.info('incoming request...');
   res.send('Hello World! You have successfully deployed the app.');
 });
 
