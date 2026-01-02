@@ -6,6 +6,13 @@ const PORT = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   console.info('incoming request...');
   const environmentVars = process.env;
+  
+  // Create HTML list of environment variables
+  const envVarsList = Object.keys(environmentVars)
+    .sort()
+    .map(key => `<div class="env-item"><span class="env-key">${key}:</span> <span class="env-value">${environmentVars[key]}</span></div>`)
+    .join('');
+  
   const html = `
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +23,7 @@ app.get('/', (req, res) => {
   <style>
     * {
       margin: 0;
-      padding: 0;
+      padding:  0;
       box-sizing: border-box;
     }
     
@@ -35,14 +42,14 @@ app.get('/', (req, res) => {
       border-radius: 16px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
       max-width: 700px;
-      width: 100%;
+      width:  100%;
       padding: 50px 40px;
       text-align: center;
     }
     
     .logo {
       font-size: 64px;
-      font-weight: bold;
+      font-weight:  bold;
       color: #667eea;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       -webkit-background-clip: text;
@@ -58,11 +65,11 @@ app.get('/', (req, res) => {
       margin: 0 auto 30px;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 48px;
-      color: white;
+      display:  flex;
+      align-items:  center;
+      justify-content:  center;
+      font-size:  48px;
+      color:  white;
     }
     
     h1 {
@@ -75,7 +82,7 @@ app.get('/', (req, res) => {
     .message {
       color: #4a5568;
       font-size: 18px;
-      line-height: 1.8;
+      line-height:  1.8;
       margin-bottom: 30px;
     }
     
@@ -103,19 +110,57 @@ app.get('/', (req, res) => {
     
     .path {
       background: white;
-      padding: 12px 16px;
+      padding:  12px 16px;
       border-radius: 6px;
       font-family: 'Courier New', monospace;
       color: #667eea;
       font-weight: 600;
-      margin-top: 12px;
-      display: inline-block;
-      border: 2px solid #e2e8f0;
+      margin-top:  12px;
+      display:  inline-block;
+      border:  2px solid #e2e8f0;
+    }
+    
+    .env-section {
+      background: #f7fafc;
+      border-left: 4px solid #764ba2;
+      padding: 20px;
+      margin: 30px 0;
+      text-align: left;
+      border-radius: 8px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    
+    .env-section h2 {
+      color: #2d3748;
+      font-size: 20px;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
+    .env-item {
+      background: white;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      border-radius:  6px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      border: 1px solid #e2e8f0;
+      word-break: break-all;
+    }
+    
+    .env-key {
+      color: #667eea;
+      font-weight: 600;
+    }
+    
+    .env-value {
+      color: #4a5568;
     }
     
     .footer {
       margin-top: 40px;
-      padding-top: 30px;
+      padding-top:  30px;
       border-top: 2px solid #e2e8f0;
     }
     
@@ -134,7 +179,7 @@ app.get('/', (req, res) => {
     
     .highlight {
       color: #667eea;
-      font-weight: 600;
+      font-weight:  600;
     }
   </style>
 </head>
@@ -148,14 +193,16 @@ app.get('/', (req, res) => {
       You have successfully deployed your application using <span class="highlight">xLT</span>. 
       Your app is now live and running smoothly.
     </p>
-    <p class="message">
-       ENV: 
-    </p>
+    
+    <div class="env-section">
+      <h2>🔧 Environment Variables</h2>
+      ${envVarsList}
+    </div>
     
     <div class="instructions">
       <h2>🚀 Next Steps</h2>
       <p>
-        Now you can commit and deploy your app directly from the xLT console:
+        Now you can commit and deploy your app directly from the xLT console: 
       </p>
       <div class="path">
         Apps → Your App → Deploy
