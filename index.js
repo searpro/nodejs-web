@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000;
 // Root route
 app.get('/', (req, res) => {
   console.info('incoming request...');
+  const environmentVars = process.env;
   const html = `
 <!DOCTYPE html>
 <html lang="en">
@@ -146,6 +147,10 @@ app.get('/', (req, res) => {
     <p class="message">
       You have successfully deployed your application using <span class="highlight">xLT</span>. 
       Your app is now live and running smoothly.
+    </p>
+    <p class="message">
+       ENV: 
+      `${environmentVars.DATABASE_URL}`
     </p>
     
     <div class="instructions">
