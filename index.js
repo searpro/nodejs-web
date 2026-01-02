@@ -150,7 +150,6 @@ app.get('/', (req, res) => {
     </p>
     <p class="message">
        ENV: 
-      `${environmentVars.DATABASE_URL}`
     </p>
     
     <div class="instructions">
