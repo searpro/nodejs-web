@@ -225,6 +225,11 @@ app.get('/health', (req, res) => {
   res.json({ status: 'OK' });
 });
 
+app.get('/slow', async(req, res) => {
+  await setTimeout(() => {}, 2000); 
+  res.json({ slowRequest: true }); 
+})
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
